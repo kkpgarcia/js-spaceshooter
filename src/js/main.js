@@ -1,8 +1,8 @@
 import * as PIXI from 'pixi.js'
 import Engine from './core/engine'
 import Vec2 from './core/vec2'
-//var Engine = require('./core/engine')
 import NotificationCenter from './core/notification_center'
+import Time from './core/time'
 
 const app = new PIXI.Application({
   width: 720,
@@ -20,16 +20,29 @@ bunny.y = 160
 app.stage.addChild(bunny);
 
 // const core = new Engine()
-var callback = function (sender, args) {
-  console.log(args)
+// var callback = function (sender, args) {
+//   console.log(args)
+// }
+
+// NotificationCenter.addObserver(callback, 'TestNotification')
+// NotificationCenter.postNotification('TestNotification', null, {a : 'b'})
+// NotificationCenter.postNotification('TestNotification', null, 'Second Hello World!')
+
+var engine = new Engine()
+engine.run()
+// engine.init()
+
+const callback = (sender, args) => {
+  bunny.rotation -= .01 * Time.deltaTime
 }
 
-NotificationCenter.addObserver(callback, 'TestNotification')
-NotificationCenter.postNotification('TestNotification', null, 'First Hello World!')
-NotificationCenter.removeObserver(callback, 'TestNotification')
-NotificationCenter.postNotification('TestNotification', null, 'Second Hello World!')
+NotificationCenter.addObserver(callback, 'CORE_UPDATE')
 
+/*
 app.ticker.add((delta) => {
   bunny.rotation -= 0.01 * delta;
+  
+  //NotificationCenter.removeObserver(callback, 'TestNotification')
   // core.update()
 });
+*/
