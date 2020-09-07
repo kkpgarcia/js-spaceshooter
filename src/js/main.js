@@ -4,6 +4,7 @@ import Vec2 from './core/vec2'
 import NotificationCenter from './core/notification_center'
 import Time from './core/time'
 import InputManager from './core/input_handler'
+import GameObject from './core/gameobject'
 
 const app = new PIXI.Application({
   width: 720,
@@ -14,11 +15,11 @@ const app = new PIXI.Application({
 });
 
 const texture = PIXI.Texture.from('assets/bunny.png');
-const bunny = new PIXI.Sprite(texture);
-bunny.anchor.set(0.5);
-bunny.x = 160
-bunny.y = 160
-app.stage.addChild(bunny);
+// const bunny = new PIXI.Sprite(texture);
+// bunny.anchor.set(0.5);
+// bunny.x = 160
+// bunny.y = 160
+// app.stage.addChild(bunny);
 
 // const core = new Engine()
 // var callback = function (sender, args) {
@@ -33,28 +34,12 @@ var engine = new Engine()
 engine.run()
 // engine.init()
 
-const callback = (sender, args) => {
+var object = new GameObject(texture)
 
-  if(InputManager.onKeyDown(InputManager.Keys.D)) {
-    bunny.position.x += 150 * Time.deltaTime
-  }
-  if(InputManager.onKeyDown(InputManager.Keys.A)) {
-    bunny.position.x -= 150 * Time.deltaTime
-  }
-  if(InputManager.onKeyDown(InputManager.Keys.W)) {
-    bunny.position.y -= 150 * Time.deltaTime
-  }
-  if(InputManager.onKeyDown(InputManager.Keys.S)) {
-    bunny.position.y += 150 * Time.deltaTime
-  }
+app.stage.addChild(object.sprite)
 
 
-  // if(Input.Key[KeyCode['W']]) {
-  //   bunny.rotation -= 5 * Time.deltaTime
-  // }
-}
-
-NotificationCenter.addObserver(callback, 'CORE_UPDATE')
+//NotificationCenter.addObserver(callback, 'CORE_UPDATE')
 
 /*
 app.ticker.add((delta) => {
