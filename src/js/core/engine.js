@@ -3,10 +3,8 @@ import NotificationCenter from './notification_center'
 
 export default class Engine {
     run() {
-        //this.frameInterval, startTime, now, then, elapsed
-        
         this.tick = (timeStamp) => {
-            var fpsInterval = 1 / 30
+            var fpsInterval = 1 / 1000
             Time.deltaTime = (timeStamp - Time.lastUpdate) * fpsInterval
             
             if(Time.deltaTime > fpsInterval) {

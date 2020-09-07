@@ -3,6 +3,7 @@ import Engine from './core/engine'
 import Vec2 from './core/vec2'
 import NotificationCenter from './core/notification_center'
 import Time from './core/time'
+import InputManager from './core/input_handler'
 
 const app = new PIXI.Application({
   width: 720,
@@ -33,7 +34,24 @@ engine.run()
 // engine.init()
 
 const callback = (sender, args) => {
-  bunny.rotation -= .01 * Time.deltaTime
+
+  if(InputManager.onKeyDown(InputManager.Keys.D)) {
+    bunny.position.x += 150 * Time.deltaTime
+  }
+  if(InputManager.onKeyDown(InputManager.Keys.A)) {
+    bunny.position.x -= 150 * Time.deltaTime
+  }
+  if(InputManager.onKeyDown(InputManager.Keys.W)) {
+    bunny.position.y -= 150 * Time.deltaTime
+  }
+  if(InputManager.onKeyDown(InputManager.Keys.S)) {
+    bunny.position.y += 150 * Time.deltaTime
+  }
+
+
+  // if(Input.Key[KeyCode['W']]) {
+  //   bunny.rotation -= 5 * Time.deltaTime
+  // }
 }
 
 NotificationCenter.addObserver(callback, 'CORE_UPDATE')
