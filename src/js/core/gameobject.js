@@ -3,6 +3,7 @@ import Transform from './transform'
 import Renderer from './renderer'
 import Aabb2D from './aabb'
 import Vec2 from './vec2'
+import GameScene from './game_scene'
 
 var _this = null
 
@@ -10,6 +11,11 @@ export default class GameObject {
     constructor(texture) {
         this.transform = new Transform()
         this.renderer = new Renderer(texture)
+        GameScene.add(null, this)
+        // this.aabb = new Aabb2D(new Vec2(100,100), new Vec2(200, 200), this.renderer.sprite)
+        //console.log('Called')
+        // NotificationCenter.addObserver(this.update, 'CORE_UPDATE')
+        
     }
 
     update() {

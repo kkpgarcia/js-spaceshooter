@@ -2,34 +2,43 @@ import NotificationCenter from './notification_center'
 import _ from 'lodash'
 import Time from './time'
 
-var _this = null
-var forcePause = false
-export default class Scene {
-    constructor(app) {
+var _this = this
+class GameScene {
+    constructor() {
+        if(!GameScene.instance)
+            GameScene.instance = this
+
+        _this = this
+        
+        return GameScene.instance
+    }
+
+    init(app) {
+        console.log(app)
         this.entities = []
         this.app = app
-        _this = this
 
         this.app.ticker.add(this.gameLoop)
         this.app.ticker.add(this.collisionUpdate)
+
+        // NotificationCenter.addObserver(this.add, 'CORE_INSTANTIATION')
+        // NotificationCenter.addObserver(this.add, 'CORE_DESTROY')
     }
 
-    add(args) {
+    add(sender, args) {
         if(_.has(args, 'renderer')) {
-            _this.app.stage.addChild(args.renderer.sprite)
-            _this.entities.push(args)
+            this.app.stage.addChild(args.renderer.sprite)
+            this.entities.push(args)
         } else
-            _this.app.stage.addChild(args)
-
-        console.log(args)
+        _this.app.stage.addChild(args)
     }
 
-    remove(args) {
+    remove(sender, args) {
         if(_.has(args, 'renderer')) {
             _this.app.stage.removeChild(args.renderer.sprite)
             _this.entities.remove(args)
         } else
-            _this.app.stage.removeChild(args)
+        _this.app.stage.removeChild(args)
 
     }
 
@@ -57,3 +66,7 @@ export default class Scene {
         }
     }
 }
+
+const instance = new GameScene()
+
+export default instance
