@@ -4,11 +4,11 @@ import Renderer from './renderer'
 import Aabb2D from './aabb'
 import Vec2 from './vec2'
 import Engine from './engine'
-
-var _this = null
+import { v4 as uuidv4 } from 'uuid'
 
 export default class GameObject {
     constructor(texture) {
+        this._uuid = uuidv4()
         this.transform = new Transform()
         this.renderer = new Renderer(texture)
         Engine.add(this)

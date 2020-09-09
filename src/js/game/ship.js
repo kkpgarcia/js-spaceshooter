@@ -74,7 +74,6 @@ class Bullet extends GameObject {
             this.transform.position.x += 20 * Time.deltaTime
             this.timer.update()
         } else {
-            delete this.timer
             GameScene.remove(this)
         }
         super.update()

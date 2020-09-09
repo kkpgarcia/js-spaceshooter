@@ -31,14 +31,20 @@ class Engine {
     }
 
     remove(args) {
+        // console.log(args)
+        // console.log(_this.entities)
         if(_.has(args, 'renderer')) {
             _this.app.stage.removeChild(args.renderer.sprite)
-            _this.entities.filter((value, index, arr) => {
-                return value == args
+            _this.entities = _this.entities.filter((value) => {
+                value._uuid != args._uuid
             })
         } else
             _this.app.stage.removeChild(args)
 
+        // console.log(_this.entities)
+
+        // if(_.isObject(args))
+        //     delete args
     }
 
     gameLoop(delta) {
@@ -46,7 +52,7 @@ class Engine {
         //     return
 
         // if(this.stateMachine.currentState != undefined)
-        //     this.stateMachine.currentState.update()
+        //     this.stateMachine.currentState.update()m
         if(_this.stateMachine != null && _this.stateMachine.currentState != null) {
             _this.stateMachine.currentState.update()
         }

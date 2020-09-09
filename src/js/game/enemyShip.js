@@ -9,6 +9,7 @@ export default class EnemyShip extends GameObject {
     }
 
     update(sender, args) {
+        this.transform.position.x -= Time.deltaTime
         super.update()
     }
 

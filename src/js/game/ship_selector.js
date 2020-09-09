@@ -51,10 +51,10 @@ export default class ShipSelector {
 
     updateSelection() {
         if(this.currentIndex == 0) {
-            this.ship1.transform.position.y = 720/2 + 150 + 30
+            this.ship1.transform.position.y = 720/2 + 150 - 30
             this.ship2.transform.position.y = 720/2 + 150
         } else {
-            this.ship2.transform.position.y = 720/2 + 150 + 30
+            this.ship2.transform.position.y = 720/2 + 150 - 30
             this.ship1.transform.position.y = 720/2 + 150
         }
     }

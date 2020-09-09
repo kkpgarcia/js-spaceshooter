@@ -3,8 +3,8 @@ import Ship from './game/ship'
 import EnemyShip from './game/enemyShip'
 import Engine from './core/engine'
 import GameObject from './core/gameobject';
-import Time from './core/time'
 import ShipSelector from './game/ship_selector';
+import GameData from './game/game_data'
 
 const app = new PIXI.Application({
   width: 1280,
@@ -18,7 +18,7 @@ Engine.init(app)
 
 const logoTexture = PIXI.Texture.from('assets/logo.png')
 
-const texture = PIXI.Texture.from('assets/ship.png');
+// const texture = PIXI.Texture.from('assets/ship.png');
 const texture2 = PIXI.Texture.from('assets/ship3.png');
 
 export class SplashScreenState {
@@ -68,7 +68,7 @@ export class MenuScreenState {
 
 export class GameState {
   enter () {
-    this.ship = new Ship(texture),
+    this.ship = new Ship(GameData.selectedShip),
     this.enemyShip = new EnemyShip(texture2),
     this.ship.transform.position.set(200, 360)
     this.enemyShip.transform.position.set(1000, 360)
@@ -80,6 +80,10 @@ export class GameState {
   }
 }
 
+export class GameEndState {
+  enter () {}
+  update() {}
+  exist() {}
+}
+
 Engine.stateMachine.changeState(new SplashScreenState())
-// Engine.stateMachine.changeState(new SplashScreenState())
-// Engine.stateMachine.changeState(new MenuScreenState())
