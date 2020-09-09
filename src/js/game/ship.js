@@ -2,6 +2,8 @@ import GameObject from '../core/gameobject'
 import InputManager from '../core/input_handler'
 import Time from '../core/time'
 import * as PIXI from 'pixi.js'
+import Timer from './timer'
+import GameScene from '../core/game_scene'
 
 export default class Ship extends GameObject {
     constructor(texture) {
@@ -39,13 +41,23 @@ export default class Ship extends GameObject {
 class Bullet extends GameObject {
     constructor(texture) {
         super(texture)
-
+        // console.log(Time.deltaTime)
+        this.timer = new Timer(10)
         this.renderer.sprite.width = 50
         this.renderer.sprite.height = 25
     }
 
     update() {
-        this.transform.position.x += 20 * Time.deltaTime
+        if(this.timer == undefined)
+            return
+
+        if(!this.timer.hasElapsed()) {
+            this.transform.position.x += 20 * Time.deltaTime
+            this.timer.update()
+        } else {
+            delete this.timer
+            GameScene.remove(this)
+        }
         super.update()
     }
 }

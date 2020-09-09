@@ -25,7 +25,7 @@ class GameScene {
         // NotificationCenter.addObserver(this.add, 'CORE_DESTROY')
     }
 
-    add(sender, args) {
+    add(args) {
         if(_.has(args, 'renderer')) {
             this.app.stage.addChild(args.renderer.sprite)
             this.entities.push(args)
@@ -33,12 +33,16 @@ class GameScene {
         _this.app.stage.addChild(args)
     }
 
-    remove(sender, args) {
+    remove(args) {
         if(_.has(args, 'renderer')) {
             _this.app.stage.removeChild(args.renderer.sprite)
-            _this.entities.remove(args)
+            // _this.entities.remove(args)
+            // _this.entities.unset(args)
+            _this.entities.filter((value, index, arr) => {
+                return value == args
+            })
         } else
-        _this.app.stage.removeChild(args)
+            _this.app.stage.removeChild(args)
 
     }
 

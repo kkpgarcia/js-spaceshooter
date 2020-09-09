@@ -11,7 +11,7 @@ export default class GameObject {
     constructor(texture) {
         this.transform = new Transform()
         this.renderer = new Renderer(texture)
-        GameScene.add(null, this)
+        GameScene.add(this)
         // this.aabb = new Aabb2D(new Vec2(100,100), new Vec2(200, 200), this.renderer.sprite)
         //console.log('Called')
         // NotificationCenter.addObserver(this.update, 'CORE_UPDATE')
