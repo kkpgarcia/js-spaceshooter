@@ -42,6 +42,15 @@ class Engine {
     }
 
     gameLoop(delta) {
+        // if(this.stateMachine == undefined)
+        //     return
+
+        // if(this.stateMachine.currentState != undefined)
+        //     this.stateMachine.currentState.update()
+        if(_this.stateMachine != null && _this.stateMachine.currentState != null) {
+            _this.stateMachine.currentState.update()
+        }
+
         for(let i = 0; i < _this.entities.length; i++) {
             let entity = _this.entities[i]
             entity.update()

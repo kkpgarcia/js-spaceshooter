@@ -16,16 +16,16 @@ export default class Ship extends GameObject {
     }
 
     update() {
-        if(InputManager.onKeyDown(InputManager.Keys.D)) {
+        if(InputManager.onKeyDown(InputManager.Keys.RIGHT)) {
             this.transform.position.x += this.speed * Time.deltaTime
         }
-        if(InputManager.onKeyDown(InputManager.Keys.A)) {
+        if(InputManager.onKeyDown(InputManager.Keys.LEFT)) {
             this.transform.position.x -= this.speed * Time.deltaTime
         }
-        if(InputManager.onKeyDown(InputManager.Keys.W)) {
+        if(InputManager.onKeyDown(InputManager.Keys.UP)) {
             this.transform.position.y -= this.speed * Time.deltaTime
         }
-        if(InputManager.onKeyDown(InputManager.Keys.S)) {
+        if(InputManager.onKeyDown(InputManager.Keys.DOWN)) {
             this.transform.position.y += this.speed * Time.deltaTime
         }
         if(InputManager.onKeyDown(InputManager.Keys.SPACE)) {
@@ -38,16 +38,16 @@ export default class Ship extends GameObject {
         }
 
         if(this.transform.position.x < 0) {
-            this.transform.position.x = 0 + this.renderer.sprite.width/2
+            this.transform.position.x = 0
         }
         if(this.transform.position.x > 1280) {
-            this.transform.position.x = 1280 + this.renderer.sprite.width/2
+            this.transform.position.x = 1280
         }
         if(this.transform.position.y < 0) {
-            this.transform.position.y = 0 + this.renderer.sprite.height/2
+            this.transform.position.y = 0 
         }
         if(this.transform.position.y > 720) {
-            this.transform.position.y = 720 + this.renderer.sprite.height/2
+            this.transform.position.y = 720 
         }
 
         if(this.nextShoot > 0) {
