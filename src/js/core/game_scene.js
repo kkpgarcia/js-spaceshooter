@@ -14,7 +14,7 @@ class GameScene {
     }
 
     init(app) {
-        console.log(app)
+        //console.log(app)
         this.entities = []
         this.app = app
 

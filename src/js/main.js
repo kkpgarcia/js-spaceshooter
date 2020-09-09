@@ -13,8 +13,8 @@ const app = new PIXI.Application({
 
 Scene.init(app)
 
-const texture = PIXI.Texture.from('assets/bunny.png');
-const texture2 = PIXI.Texture.from('assets/tank.png');
+const texture = PIXI.Texture.from('assets/ship.png');
+const texture2 = PIXI.Texture.from('assets/ship3.png');
 
 // var scene = new Scene(app)
 var secondShip = new EnemyShip(texture2)
@@ -22,5 +22,5 @@ var ship = new Ship(texture)
 // scene.add(ship)
 // scene.add(secondShip)
 
-ship.transform.position.set(200, 200)
-secondShip.transform.position.set(500, 500)
+ship.transform.position.set(200, 360)
+secondShip.transform.position.set(1000, 360)
