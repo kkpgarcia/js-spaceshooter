@@ -11,6 +11,8 @@ export default class Ship extends GameObject {
         this.bulletTexture = PIXI.Texture.from('assets/bullet.png')
 
         this.speed = 5
+        this.fireRate = 5
+        this.nextShoot = 0
     }
 
     update() {
@@ -28,12 +30,16 @@ export default class Ship extends GameObject {
         }
         if(InputManager.onKeyDown(InputManager.Keys.SPACE)) {
             //Shoot
-            
-            var bullet = new Bullet(this.bulletTexture)
-            bullet.transform.position.set(this.transform.position.x, this.transform.position.y)
-            
+            if(this.nextShoot <= 0) {
+                var bullet = new Bullet(this.bulletTexture)
+                bullet.transform.position.set(this.transform.position.x + this.renderer.sprite.width/2, this.transform.position.y)
+                this.nextShoot = this.fireRate
+            } 
         }
-        
+
+        if(this.nextShoot > 0) {
+            this.nextShoot -= 1;   
+        }
         super.update()
     }
 }
@@ -41,7 +47,7 @@ export default class Ship extends GameObject {
 class Bullet extends GameObject {
     constructor(texture) {
         super(texture)
-        // console.log(Time.deltaTime)
+        
         this.timer = new Timer(10)
         this.renderer.sprite.width = 50
         this.renderer.sprite.height = 25
