@@ -1,28 +1,25 @@
 import NotificationCenter from './notification_center'
 import _ from 'lodash'
 import Time from './time'
+import StateMachine from './statemachine'
 
 var _this = this
-class GameScene {
+class Engine {
     constructor() {
-        if(!GameScene.instance)
-            GameScene.instance = this
+        if(!Engine.instance)
+            Engine.instance = this
 
         _this = this
         
-        return GameScene.instance
+        return Engine.instance
     }
 
     init(app) {
-        //console.log(app)
         this.entities = []
         this.app = app
-
         this.app.ticker.add(this.gameLoop)
         this.app.ticker.add(this.collisionUpdate)
-
-        // NotificationCenter.addObserver(this.add, 'CORE_INSTANTIATION')
-        // NotificationCenter.addObserver(this.add, 'CORE_DESTROY')
+        this.stateMachine = new StateMachine()
     }
 
     add(args) {
@@ -36,8 +33,6 @@ class GameScene {
     remove(args) {
         if(_.has(args, 'renderer')) {
             _this.app.stage.removeChild(args.renderer.sprite)
-            // _this.entities.remove(args)
-            // _this.entities.unset(args)
             _this.entities.filter((value, index, arr) => {
                 return value == args
             })
@@ -71,6 +66,6 @@ class GameScene {
     }
 }
 
-const instance = new GameScene()
+const instance = new Engine()
 
 export default instance

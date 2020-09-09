@@ -3,7 +3,7 @@ import InputManager from '../core/input_handler'
 import Time from '../core/time'
 import * as PIXI from 'pixi.js'
 import Timer from './timer'
-import GameScene from '../core/game_scene'
+import GameScene from '../core/engine'
 
 export default class Ship extends GameObject {
     constructor(texture) {
@@ -35,6 +35,19 @@ export default class Ship extends GameObject {
                 bullet.transform.position.set(this.transform.position.x + this.renderer.sprite.width/2, this.transform.position.y)
                 this.nextShoot = this.fireRate
             } 
+        }
+
+        if(this.transform.position.x < 0) {
+            this.transform.position.x = 0 + this.renderer.sprite.width/2
+        }
+        if(this.transform.position.x > 1280) {
+            this.transform.position.x = 1280 + this.renderer.sprite.width/2
+        }
+        if(this.transform.position.y < 0) {
+            this.transform.position.y = 0 + this.renderer.sprite.height/2
+        }
+        if(this.transform.position.y > 720) {
+            this.transform.position.y = 720 + this.renderer.sprite.height/2
         }
 
         if(this.nextShoot > 0) {
